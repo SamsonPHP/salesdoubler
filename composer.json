@@ -1,0 +1,22 @@
+{
+	"name":"samsonphp/salesdoubler",
+    "description": "SamsonPHP salesdoubler CPA integration module",
+    "keywords": ["cpa", "samsonphp", "salesdoubler"],
+    "authors":[
+        {
+            "name":"Vitaly Iegorov",
+            "email":"egorov@samsonos.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+	"license":"Open Software License (OSL) v 3.0",
+	"homepage":"http://samsonos.com/",
+    "autoload" : {
+        "classmap": ["src/"],
+        "psr-0": {
+            "samsonphp\\salesdoubler\\": "src/"
+        }
+    }
+}
