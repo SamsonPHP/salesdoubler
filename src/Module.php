@@ -38,7 +38,7 @@ class Module extends CompressableService
     public $postbackID = '1240';
 
     /** @var string Current user internal identifier */
-    public $transID;
+    public $transID = 'salesdoubler_transid';
 
     /** @var string Identifier */
     protected $id = 'salesdoubler';
@@ -60,7 +60,7 @@ class Module extends CompressableService
         } elseif (isset($_GET[$this->getParamName]) && !empty($_GET[$this->getParamName])) {
             $_SESSION[$this->cookieID] = $_GET[$this->getParamName];
             // Generate random internal trans identifier
-            $this->transID = md5(rand(1, 1000) . $_GET[$this->getParamName] . time() . rand(1, 1000));
+            $_SESSION[$this->transID] = md5(rand(1, 1000) . $_GET[$this->getParamName] . time() . rand(1, 1000));
             setcookie($this->cookieID, $_GET[$this->getParamName], time() + $this->cookiePeriod);
         }
     }
@@ -75,7 +75,7 @@ class Module extends CompressableService
             $url = str_replace('@clickid', $_COOKIE[$this->cookieID], $this->postbackUrl);
             $url = str_replace('@token', $this->postbackToken, $url);
             $url = str_replace('@id', $this->postbackID, $url);
-            $url = str_replace('@transid', $this->transID, $url);
+            $url = str_replace('@transid', $_SESSION[$this->transID], $url);
 
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
