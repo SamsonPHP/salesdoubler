@@ -41,7 +41,7 @@ class Module extends CompressableService
     public $transID;
 
     /** @var string Identifier */
-    protected $id = 'SalesDoubler';
+    protected $id = 'salesdoubler';
 
     /**
      * Initialize module.
