@@ -72,10 +72,17 @@ class Module extends CompressableService
     {
         // If we have salesdoubler cookie and CURL is working
         if (isset($_COOKIE[$this->cookieID]) && $curl = curl_init()) {
-            $url = str_replace('@clickid', $_COOKIE[$this->cookieID], $this->postbackUrl);
+            $url = $this->postbackUrl;
             $url = str_replace('@token', $this->postbackToken, $url);
             $url = str_replace('@id', $this->postbackID, $url);
-            $url = str_replace('@transid', $_SESSION[$this->transID], $url);
+
+            if (isset($_COOKIE[$this->cookieID])) {
+                $url = str_replace('@clickid', $_COOKIE[$this->cookieID], $url);
+            }
+
+            if (isset($_SESSION[$this->transID])) {
+                $url = str_replace('@transid', $_SESSION[$this->transID], $url);
+            }
 
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
